@@ -1,112 +1,439 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Madhusudhan Reddy Resume</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Profile - Madhusudhan Reddy Karnati</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    /* Root & reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      color: #111;
+      background: #f9fafb;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a {
+      color: #1a73e8;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    a:hover, a:focus {
+      color: #0049b7;
+      text-decoration: underline;
+      outline: none;
+    }
+
+    /* Layout grid for desktop */
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 3rem;
+      display: grid;
+      gap: 16px;
+      background: white;
+      box-shadow: 0 4px 15px rgb(0 0 0 / 0.1);
+      border-radius: 12px;
+    }
+
+    /* Responsive grid columns */
+    @media (min-width: 767px) {
+      .container {
+        grid-template-columns: 280px 1fr 200px;
+        grid-template-areas:
+          "sidebar main aside";
+        padding: 2rem 3rem 3rem;
+      }
+    }
+    @media (max-width: 766px) {
+      .container {
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem 1rem 2.5rem;
+      }
+    }
+
+    /* Sidebar styling */
+    .sidebar {
+      background-color: #c2caf7;
+      padding: 24px 20px;
+      border-radius: 0 0 16px 0;
+      grid-area: sidebar;
+      color: #121212;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    .sidebar a.contact-link {
+      display: inline-flex;
+      align-items: center;
+      column-gap: 6px;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .sidebar a.contact-link:hover {
+      text-decoration: underline;
+    }
+
+    .sidebar .material-icons.md-18 {
+      font-size: 18px;
+      color: #101840;
+      vertical-align: middle;
+    }
+
+    .sidebar h3 {
+      margin-top: 32px;
+      margin-bottom: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .sidebar p, .sidebar li {
+      font-weight: 400;
+      font-size: 0.925rem;
+      margin: 3px 0;
+      line-height: 1.3;
+    }
+
+    .sidebar ul {
+      padding-left: 1rem;
+      margin: 4px 0 18px 0;
+      list-style: none;
+    }
+    .sidebar ul li {
+      display: flex;
+      align-items: flex-start;
+      column-gap: 8px;
+      margin-bottom: 6px;
+    }
+    .sidebar ul li::before {
+      content: "\\2022"; /* bullet */
+      color: #030b52;
+      font-weight: 700;
+      display: inline-block;
+      width: 12px;
+      margin-left: -12px;
+      font-size: 1.1rem;
+      line-height: 1;
+      margin-top: 4px;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    /* Main section styling */
+    .main-content {
+      grid-area: main;
+      padding-left: 16px;
+      padding-right: 2rem;
+      color: #121212;
+    }
+
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .main-header h1 {
+      font-weight: 600;
+      font-size: 1.9rem;
+      line-height: 1.2;
+      max-width: 55ch;
+      margin: 0;
+    }
+
+    .profile-pic {
+      width: 110px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid #c2caf7;
+      background: #e5e8ff;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    /* Section headers */
+    .section-header {
+      background-color: #c2caf7;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 8px 12px;
+      border-radius: 4px;
+      color: #121212;
+      margin-bottom: 10px;
+      user-select: none;
+      max-width: max-content;
+    }
+    .section-header.uppercase {
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    /* Paragraph and text content styling */
+    p.intro-text {
+      font-weight: 400;
+      font-size: 1rem;
+      max-width: 68ch;
+      margin-top: 0;
+      margin-bottom: 24px;
+    }
+
+    /* Table Styling */
+    table.academic-credentials {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 32px;
+    }
+    table.academic-credentials th,
+    table.academic-credentials td {
+      border: 1px solid #aaa;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      color: #222;
+      vertical-align: top;
+      text-align: left;
+    }
+    table.academic-credentials th {
+      background-color: #c2caf7;
+      font-weight: 700;
+      user-select: none;
+    }
+
+    /* Projects, IT Proficiency & Achievements styling */
+    .projects-list,
+    .skills-list,
+    .achievements-list {
+      list-style: none;
+      margin: 0;
+      padding-left: 0;
+    }
+
+    .projects-list li,
+    .skills-list li,
+    .achievements-list li {
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .projects-list li strong {
+      font-weight: 700;
+      margin-right: 4px;
+    }
+
+    .material-icons.md-18.list-icon {
+      color: #080c36;
+      font-size: 18px;
+      margin-top: 3px;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    /* Aside column for spacing on large desktops */
+    .aside-space {
+      grid-area: aside;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 766px) {
+      .sidebar {
+        border-radius: 12px 12px 0 0;
+        padding: 20px 16px;
+        margin-bottom: 24px;
+      }
+      .main-content {
+        padding-left: 0;
+        padding-right: 0;
+      }
+      table.academic-credentials th,
+      table.academic-credentials td {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+      }
+      .main-header {
+        justify-content: flex-start;
+        gap: 16px;
+      }
+      .profile-pic {
+        margin-top: 12px;
+      }
+      .section-header {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
+  <header role="banner" aria-label="Site header" style="padding:14px 1.5rem; text-align:center; background:#c2caf7; font-weight:700; font-size:1.3rem; user-select:none;">
+    Contact Profile - Madhusudhan Reddy Karnati
+  </header>
+
+  <main class="container" role="main">
+    <aside class="sidebar" aria-label="Contact Information and personal details">
+      <div>
+        <strong>CONTACT</strong>
+        <p>
+          <span class="material-icons md-18" aria-hidden="true">email</span>
+          <a href="mailto:madhujobessence@gmail.com" class="contact-link" aria-describedby="email-desc">madhujobessence@gmail.com</a>
+          <span id="email-desc" class="sr-only">Email address used for professional contact</span>
+        </p>
+        <p>
+          <span class="material-icons md-18" aria-hidden="true">phone</span>
+          8639975495
+        </p>
+      </div>
+
+      <section aria-labelledby="present-address-header">
+        <h3 id="present-address-header">Present Address:</h3>
+        <p>2/24 sudharshan nagar,<br />Thikkavaram road,<br />Marripadu,<br />Nellore - 524312.</p>
+      </section>
+
+      <section aria-labelledby="personal-details-header">
+        <h3 id="personal-details-header">Personal Details:</h3>
+        <ul>
+          <li>Date of Birth: 20<sup>th</sup> April 2004</li>
+          <li>Languages Known: English, Telugu</li>
+          <li>Nationality: Indian</li>
+          <li>Hobbies: Reading, Walking, Playing Chess.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="interpersonal-skills-header">
+        <h3 id="interpersonal-skills-header">Interpersonal Skills:</h3>
+        <ul>
+          <li>Friendly, Positive Attitude</li>
+          <li>Teamwork and Collaboration</li>
+          <li>Flexible and Adoptable</li>
+          <li>Decision-Making</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="pos-responsibility-header">
+        <h3 id="pos-responsibility-header">Position of Responsibility:</h3>
+        <ul>
+          <li>Coordinator of College Events Committee, AutoSpark 2022</li>
+          <li>Anti-Ragging Committee member, RGM Nandyal 2024-2025</li>
+        </ul>
+      </section>
+    </aside>
+
+    <section class="main-content" aria-label="Main profile details and career information">
+      <header class="main-header">
         <h1>Madhusudhan Reddy Karnati</h1>
-        <p>📧 madhujobessence@gmail.com | 📞 8639975495</p>
-        <p>📍 2/24 Sudharshan Nagar, Thikkavaram Road, Marripadu, Nellore-524312</p>
-    </header>
+        <img
+          src="https://placehold.co/110x120/png?text=Profile+Image"
+          alt="Profile photo of Madhusudhan Reddy Karnati wearing light shirt with short hair and beard, facing forward."
+          class="profile-pic"
+          loading="lazy" />
+      </header>
 
-    <section>
-        <h2>🎯 Career Objective</h2>
-        <p>Motivated student eager to apply classroom knowledge to real-world experience, with a strong willingness to learn and contribute. Effective communicator with a collaborative mindset, ready to bring fresh perspectives and a strong work ethic to any team.</p>
-    </section>
+      <section aria-labelledby="career-objective-header">
+        <h2 class="section-header uppercase" id="career-objective-header">Career Objective</h2>
+        <p class="intro-text">
+          Motivated student eager to apply classroom knowledge to real-world experience, with a strong willingness to learn and contribute. Effective communicator with a collaborative mindset, ready to bring fresh perspectives and a strong work ethic to any team.
+        </p>
+      </section>
 
-    <section>
-        <h2>🎓 Academic Credentials</h2>
-        <table>
+      <section aria-labelledby="academic-creds-header">
+        <h2 class="section-header uppercase" id="academic-creds-header">Basic Academic Credentials</h2>
+        <table class="academic-credentials" role="table" aria-describedby="academic-desc">
+          <caption id="academic-desc" class="sr-only">Academic qualifications with board, year, and percentage details</caption>
+          <thead>
             <tr>
-                <th>Qualification</th>
-                <th>Institution</th>
-                <th>Year</th>
-                <th>Score</th>
+              <th scope="col">Qualification</th>
+              <th scope="col">Board/University</th>
+              <th scope="col">Year</th>
+              <th scope="col">Percentage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>B. TECH<br />(Computer Science and Business System)</td>
+              <td>RGM College of Engineering And Technology, Nandyal</td>
+              <td>2023-2026(expected)</td>
+              <td>7.88 CGPA</td>
             </tr>
             <tr>
-                <td>B.Tech (CSBS)</td>
-                <td>RGM College of Engineering, Nandyal</td>
-                <td>2023-2026</td>
-                <td>7.88 CGPA</td>
+              <td>Diploma<br />(Automobile Engineering)</td>
+              <td>Government Polytechnic College, Anantapuramu</td>
+              <td>2023</td>
+              <td>85%</td>
             </tr>
             <tr>
-                <td>Diploma (Automobile)</td>
-                <td>Govt Polytechnic, Anantapuramu</td>
-                <td>2023</td>
-                <td>85%</td>
+              <td>High School</td>
+              <td>Netaji Pilot High School, Nellore</td>
+              <td>2020</td>
+              <td>99%</td>
             </tr>
-            <tr>
-                <td>High School</td>
-                <td>Netaji Pilot High School, Nellore</td>
-                <td>2020</td>
-                <td>99%</td>
-            </tr>
+          </tbody>
         </table>
-    </section>
+      </section>
 
-    <section>
-        <h2>💼 Projects</h2>
-        <ul>
-            <li><strong>BeMyEye:</strong> A mobile app using object detection and text recognition to assist visually impaired people.</li>
-            <li><strong>Human Activity Recognition:</strong> Detects human activity using smartphone sensor data and machine learning.</li>
-            <li><strong>Regenerative Braking System:</strong> Converts kinetic energy into electrical energy in vehicles.</li>
+      <section aria-labelledby="projects-header">
+        <h2 class="section-header uppercase" id="projects-header">Projects</h2>
+        <ul class="projects-list">
+          <li>
+            <span class="material-icons md-18 list-icon" aria-hidden="true">fiber_manual_record</span>
+            <strong>BeMyEye:</strong>
+            A proposed solution of a mobile app to help visually impaired people to do their daily tasks independently. It uses various deep learning models like object detection, text recognition and image captioning to describe the surroundings, locate the objects and read texts to the user.
+          </li>
+          <li>
+            <span class="material-icons md-18 list-icon" aria-hidden="true">fiber_manual_record</span>
+            <strong>Human Activity Recognition (Machine Learning):</strong>
+            A model to determine the human activity using the data collected from the smartphone’s embedded accelerometer and gyroscope.
+          </li>
+          <li>
+            <span class="material-icons md-18 list-icon" aria-hidden="true">fiber_manual_record</span>
+            <strong>Regenerative Braking System:</strong>
+            It is an energy recovery mechanism that slows down a moving vehicle by converting its kinetic energy into electrical energy.
+          </li>
         </ul>
-    </section>
+      </section>
 
-    <section>
-        <h2>💻 IT Proficiency</h2>
-        <ul>
-            <li>Languages: Java, Python</li>
-            <li>Database: MongoDB, SQL</li>
-            <li>Web: HTML, CSS, JavaScript (Basics)</li>
-            <li>Cloud: Microsoft Azure</li>
+      <section aria-labelledby="it-proficiency-header">
+        <h2 class="section-header uppercase" id="it-proficiency-header">IT Proficiency</h2>
+        <ul class="skills-list">
+          <li><span class="material-icons md-18 list-icon" aria-hidden="true">fiber_manual_record</span>Languages: Java, Python</li>
+          <li><span class="material-icons md-18 list-icon" aria-hidden="true">fiber_manual_record</span>Database Languages: MongoDB, SQL</li>
+          <li><span class="material-icons md-18 list-icon" aria-hidden="true">fiber_manual_record</span>General and graphic application: HTML, CSS, JavaScript (basics)</li>
+          <li><span class="material-icons md-18 list-icon" aria-hidden="true">fiber_manual_record</span>Cloud Technologies: Microsoft Azure</li>
         </ul>
-    </section>
+      </section>
 
-    <section>
-        <h2>🏆 Achievements</h2>
-        <ul>
-            <li>73rd Rank in E-CET 2023</li>
-            <li>Branch Topper in Diploma</li>
+      <section aria-labelledby="achievements-header">
+        <h2 class="section-header uppercase" id="achievements-header">Achievements and Activities</h2>
+        <ul class="achievements-list">
+          <li><span class="material-icons md-18 list-icon" aria-hidden="true">fiber_manual_record</span>Got 73rd rank in E-CET Examination 2023</li>
+          <li><span class="material-icons md-18 list-icon" aria-hidden="true">fiber_manual_record</span>Branch topper in diploma</li>
         </ul>
+      </section>
     </section>
 
-    <section>
-        <h2>🧠 Interpersonal Skills</h2>
-        <ul>
-            <li>Friendly, Positive Attitude</li>
-            <li>Teamwork & Collaboration</li>
-            <li>Flexible & Adaptable</li>
-            <li>Decision Making</li>
-        </ul>
-    </section>
+    <aside class="aside-space" aria-hidden="true"></aside>
+  </main>
 
-    <section>
-        <h2>📌 Responsibilities</h2>
-        <ul>
-            <li>Coordinator - AutoSpark 2022</li>
-            <li>Anti-Ragging Committee Member (2024-2025)</li>
-        </ul>
-    </section>
+  <footer role="contentinfo" style="text-align:center; padding:16px 12px; font-size:0.875rem; color:#444; user-select:none;">
+    &copy; 2024 Madhusudhan Reddy Karnati. All rights reserved.
+  </footer>
 
-    <section>
-        <h2>👤 Personal Details</h2>
-        <ul>
-            <li>DOB: 20th April 2004</li>
-            <li>Languages: English, Telugu</li>
-            <li>Nationality: Indian</li>
-            <li>Hobbies: Reading, Walking, Playing Chess</li>
-        </ul>
-    </section>
-
-    <footer>
-        <p>© 2025 Madhusudhan Reddy | Portfolio Resume</p>
-    </footer>
-
-    <script src="script.js"></script>
+  <script>
+    // No interactive JS required for this static layout
+  </script>
 </body>
 </html>
+
